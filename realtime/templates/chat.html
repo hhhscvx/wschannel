@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+</head>
+<body>
+    <div style="text-align: center;">
+        <h1 id="app">{{ text }}</h1>
+    </div>
+
+    <script>
+        let socket = new WebSocket('ws://localhost:8000/ws/channel/')
+
+        socket.onmessage = (event) => {
+            let data = JSON.parse(event.data) // считай принимаем request с consumer`а
+            console.log(data);
+            app.innerHTML = data['message']
+        }
+    </script>
+</body>
+</html>
